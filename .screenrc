@@ -1,0 +1,10 @@
+startup_message off
+defscrollback 65535
+altscreen on
+vbell off
+autodetach on
+term xterm-256color
+
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %H(%l) %{..Y} %Y/%m/%d %c:%s"
