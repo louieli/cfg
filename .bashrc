@@ -1,11 +1,34 @@
 
 ###############################################################################
 #                                   别名
+# 如果别名与原本的命令同名，可以使用\command来访问原来的命令
 ###############################################################################
 
 alias e=dancepill
 alias h='history' 
 alias pdb='python -m pdb'
+
+alias ls='ls --color=auto'
+alias ll='ls --color -hl --sort=size'
+alias le='ls --color -hl --sort=extension'
+alias lt='ls --color -hl --sort=time'
+
+alias grep='grep --color=auto'
+alias meminfo='free -m -l -t'
+alias ps? = "ps aux | grep"
+#显示出哪些应用连接到网络
+alias listen="lsof -P -i -n" 
+#显示出活动的端口
+alias port='netstat -tulanp'
+alias ipinfo="curl ifconfig.me && curl ifconfig.me/host"
+alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'"
+
+alias cmount="mount | column -t"
+alias histg='history | grep'
+alias genpasswd="strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 30 | tr -d '\n'; echo"
+
+#接管某个进程的标准输出和标准错误
+alias intercept="sudo strace -ff -e trace=write -e write=1,2 -p" 
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -85,6 +108,11 @@ man() {
             man "$@"
 }
 
+mcd() { mkdir -p "$1"; cd "$1";}
 
+#将当前目录下的文件按大小排序
+sbs() { 
+    du -b --max-depth 1 | sort -nr | perl -pe 's{([0-9]+)}{sprintf "%.1f%s", $1>=2**30? ($1/2**30, "G"): $1>=2**20? ($1/2**20, "M"): $1>=2**10? ($1/2**10, "K"): ($1, "")}e';
+} 
 
 
